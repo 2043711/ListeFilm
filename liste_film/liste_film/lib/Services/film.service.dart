@@ -18,8 +18,6 @@ Future<bool> insertFilm(Film film) async {
   return true;
 }
 
-
-
 //select
 Future<List<Film>> getFilms() async {
   final db = await SqliteService.database;
@@ -31,30 +29,30 @@ Future<List<Film>> getFilms() async {
 }
 
 //select film where genre -> comedie
-Future<List<Film>> getFilmsComedie() async {
+Future<List<Film>> getFilmsComedie(String added) async {
   final db = await SqliteService.database;
 
-  final List<Map<String, dynamic>> maps = await db.rawQuery("SELECT * FROM listefilms WHERE genre = 'Comédie'");
+  final List<Map<String, dynamic>> maps = await db.rawQuery("SELECT * FROM listefilms WHERE genre = 'Comédie' AND added = '$added'");
   return List.generate(maps.length, (i) {
     return Film.fromMap(maps[i]);
   });
 }
 
 //select film where genre -> action
-Future<List<Film>> getFilmsAction() async {
+Future<List<Film>> getFilmsAction(String added) async {
   final db = await SqliteService.database;
 
-  final List<Map<String, dynamic>> maps = await db.rawQuery("SELECT * FROM listefilms WHERE genre = 'Action'");
+  final List<Map<String, dynamic>> maps = await db.rawQuery("SELECT * FROM listefilms WHERE genre = 'Action' AND added = '$added'");
   return List.generate(maps.length, (i) {
     return Film.fromMap(maps[i]);
   });
 }
 
 //select film where genre -> aventures
-Future<List<Film>> getFilmsAventure() async {
+Future<List<Film>> getFilmsAventure(String added) async {
   final db = await SqliteService.database;
 
-  final List<Map<String, dynamic>> maps = await db.rawQuery("SELECT * FROM listefilms WHERE genre = 'Aventure'");
+  final List<Map<String, dynamic>> maps = await db.rawQuery("SELECT * FROM listefilms WHERE genre = 'Aventure' AND added = '$added'");
   return List.generate(maps.length, (i) {
     return Film.fromMap(maps[i]);
   });

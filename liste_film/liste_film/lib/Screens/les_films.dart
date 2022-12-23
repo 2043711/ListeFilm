@@ -12,16 +12,15 @@ class LesFilms extends StatefulWidget {
   List<Film> filmsAction = [];
   List<Film> filmsAventure = [];
   List<Film> filmsComedie = [];
-  LesFilms({
-    Key? key,
-  }) : super(key: key);
+  bool liste;
+  LesFilms({super.key, required this.liste});
 
   @override
   State<LesFilms> createState() => _LesFilmsState();
 }
 
 class _LesFilmsState extends State<LesFilms> {
-  var film1 = const Film(
+  var film1 = Film(
   id: 1,
   titre: "leFilm1",
   genre: "Aventure",
@@ -35,24 +34,45 @@ class _LesFilmsState extends State<LesFilms> {
   @override
     void initState() {
     super.initState();
-    getFilmsAction().then((value) {
-      setState(() {
-        widget.filmsAction = value;
-        print(widget.filmsAction);
+    if ( widget.liste == true) {
+      getFilmsAction("no").then((value) {
+        setState(() {
+          widget.filmsAction = value;
+          print(widget.filmsAction);
+        });
       });
-    });
-    getFilmsComedie().then((value) {
-      setState(() {
-        widget.filmsComedie = value;
-        print(widget.filmsComedie);
+      getFilmsComedie("no").then((value) {
+        setState(() {
+          widget.filmsComedie = value;
+          print(widget.filmsComedie);
+        });
       });
-    });
-    getFilmsAventure().then((value) {
-      setState(() {
-        widget.filmsAventure = value;
-        print(widget.filmsAventure);
+      getFilmsAventure("no").then((value) {
+        setState(() {
+          widget.filmsAventure = value;
+          print(widget.filmsAventure);
+        });
       });
-    });
+    } else {
+            getFilmsAction("yes").then((value) {
+        setState(() {
+          widget.filmsAction = value;
+          print(widget.filmsAction);
+        });
+      });
+      getFilmsComedie("yes").then((value) {
+        setState(() {
+          widget.filmsComedie = value;
+          print(widget.filmsComedie);
+        });
+      });
+      getFilmsAventure("yes").then((value) {
+        setState(() {
+          widget.filmsAventure = value;
+          print(widget.filmsAventure);
+        });
+      });
+    }
   }
   @override
   Widget build(BuildContext context) {

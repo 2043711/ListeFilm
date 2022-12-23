@@ -14,9 +14,9 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 //the first one is to add the film to the list of films to watch the second one is to delete the film
 // ignore: must_be_immutable
 class UnFilm extends StatefulWidget {
-  final Film film;
+  Film film;
 
-  const UnFilm({super.key, required this.film});
+  UnFilm({super.key, required this.film});
 
   @override
   State<UnFilm> createState() => _UnFilmState();
@@ -46,6 +46,7 @@ class _UnFilmState extends State<UnFilm> {
       super.dispose();
     }
 
+  
 
   @override
   Widget build(BuildContext context) {
@@ -72,26 +73,73 @@ class _UnFilmState extends State<UnFilm> {
       body: Column(
         children: [
           player,
-          Text(widget.film.description),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text("Ajouter"),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              deleteFilm(widget.film.id);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LesFilms(),
+          const Padding(padding: EdgeInsets.all(25)),
+          Row( 
+            children: [   
+              Spacer(),       
+              //make a button with an icon of a plus
+              //when we click on it we add the film to the list of films to watch
+              if (widget.film.added == "no")
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.green,
                 ),
-              );
-            },
-            child: const Text("Supprimer"),
+                onPressed: () {
+                  widget.film.added = "yes";
+                  updateFilm(widget.film);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LesFilms(liste: true),
+                    ),
+                  );
+                },
+                child: const Text("Ajouter à la liste"),
+              ),
+              if (widget.film.added == "yes")
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.yellow[900],
+                ),
+                onPressed: () {
+                  widget.film.added = "no";
+                  updateFilm(widget.film);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LesFilms(liste: false),
+                    ),
+                  );
+                },
+                child: const Text("Retirer de la liste"),
+              ),
+              Spacer(),
+              ElevatedButton(
+                //make button grey
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                ),
+                onPressed: () {
+                  deleteFilm(widget.film.id);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LesFilms(liste: true),
+                    ),
+                  );
+                },
+                child: const Text("Supprimer le film"),
+              ),
+              Spacer(),
+            ],
           ),
+          const Padding(padding: EdgeInsets.all(25)),
+          Text(widget.film.titre, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic)),
+          const Padding(padding: EdgeInsets.all(25)),
+          Text(widget.film.description, style: const TextStyle(fontSize: 24)),
         ],
       ),
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.white,
     ));
   }
 }

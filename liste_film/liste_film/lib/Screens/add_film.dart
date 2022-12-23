@@ -200,7 +200,7 @@ class _AddFilmState extends State<AddFilm> {
                   Future.delayed(const Duration(milliseconds: 500), () {
                     //go back to list of films
                     Navigator.of(context).push(MaterialPageRoute(builder: 
-                  (context) => LesFilms()));
+                  (context) => LesFilms(liste: true)));
                   });         
                 },),
             ),

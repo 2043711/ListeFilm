@@ -8,7 +8,7 @@ import "package:liste_film/Widgets/menu_button.dart";
 // ignore: must_be_immutable
 class Home extends StatefulWidget {
   List<Film> lastFilms = [
-    const Film(
+    Film(
       id: 1,
       titre: "leFilm1",
       genre: "Aventure",
@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
       urlVideo: "https://youtu.be/1P1J3WRV4-s",
       added: "no",
     ),
-    const Film(
+    Film(
       id: 2,
       titre: "leFilm2",
       genre: "Action",
@@ -26,7 +26,7 @@ class Home extends StatefulWidget {
       urlVideo: "https://youtu.be/kVrqfYjkTdQ",
       added: "no",
     ),
-    const Film(
+    Film(
       id: 3,
       titre: "leFilm3",
       genre: "Action",
@@ -45,7 +45,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-    var film1 = const Film(
+    var film1 = Film(
     id: 1,
     titre: "leFilm1",
     genre: "Aventure",
@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
     urlVideo: "https://youtu.be/1P1J3WRV4-s",
     added: "no");
 
-    var film2 = const Film(
+    var film2 = Film(
     id: 2,
     titre: "leFilm2",
     genre: "Action",
@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
     urlVideo: "https://youtu.be/kVrqfYjkTdQ",
     added: "no");
 
-    var film3 = const Film(
+    var film3 = Film(
     id: 3,
     titre: "leFilm3",
     genre: "Action",
@@ -106,18 +106,18 @@ class _HomeState extends State<Home> {
                 color: Colors.white,
                 action: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: 
-                  (context) => LesFilms()));
+                  (context) => LesFilms(liste: true)));
                 },
               ),
               const Padding(padding: EdgeInsets.all(25)),
-              const MenuButton(
+              MenuButton(
                 text: "Mes listes",
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
-                /*action: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const HighScore()));
-                },*/
+                action: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: 
+                  (context) => LesFilms(liste: false)));
+                },
               ),
               const Spacer(),
               //draw a grey rectangle with 3 images inside

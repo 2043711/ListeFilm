@@ -5,9 +5,9 @@ class Film{
   final String description;
   final String image;
   final String urlVideo;
-  final String added;
+  late  String added;
 
-  const Film({required this.id, required this.titre, required this.genre, required this.description, required this.image, required this.urlVideo, required this.added});
+  Film({required this.id, required this.titre, required this.genre, required this.description, required this.image, required this.urlVideo, required this.added});
 
   Map<String, dynamic> toMap() {
     return {
